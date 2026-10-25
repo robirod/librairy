@@ -7,7 +7,7 @@ SearchBar::SearchBar()
 {
     // Search input
     searchInput.setMultiLine(false);
-    searchInput.setTextToShowWhenEmpty("Search library... (Cmd+F)",
+    searchInput.setTextToShowWhenEmpty("Search library...",
                                        juce::Colours::grey);
     searchInput.setColour(juce::TextEditor::backgroundColourId,
                           juce::Colour(0xFF2D2D2D));

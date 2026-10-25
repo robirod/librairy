@@ -76,7 +76,7 @@ void LibrarySidebar::paintListBoxItem(int rowNumber, juce::Graphics& g,
 
     if (rowNumber == 0)
     {
-        g.drawText("🎧 All Audio", 10, 0, width - 20, height,
+        g.drawText("All Audio", 10, 0, width - 20, height,
                    juce::Justification::centredLeft, true);
     }
     else
@@ -84,7 +84,7 @@ void LibrarySidebar::paintListBoxItem(int rowNumber, juce::Graphics& g,
         size_t idx = static_cast<size_t>(rowNumber - 1);
         if (idx < currentLibraries.size())
         {
-            auto name = "📁 " + currentLibraries[idx].name;
+            auto name = currentLibraries[idx].name;
             g.drawText(name, 10, 0, width - 60, height,
                        juce::Justification::centredLeft, true);
 

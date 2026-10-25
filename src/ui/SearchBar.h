@@ -35,7 +35,7 @@ public:
 
 private:
     juce::TextEditor searchInput;
-    juce::TextButton clearButton { "✕" };
+    juce::TextButton clearButton { "x" };
     juce::TextButton filterButton { "Filters" };
 
     juce::ListenerList<Listener> listeners;
