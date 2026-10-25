@@ -60,6 +60,10 @@ private:
         // ---- SearchBar::Listener ----
         void searchTextChanged(const juce::String& query) override;
         void searchSubmitted(const juce::String& query) override;
+        void addFolderRequested() override;
+        void outputDeviceChanged(const juce::String& deviceName) override;
+        void audioSetupRequested() override;
+        void scanCancelRequested() override;
 
         // ---- ResultsTable::Listener ----
         void fileSelected(const AudioFileInfo& info) override;
@@ -99,7 +103,9 @@ private:
         std::optional<AudioFileInfo> activeFileInfo;
         std::unique_ptr<juce::FileChooser> fileChooser;
 
+        void promptAddFolder();
         void refreshLibraries();
+        void refreshAudioOutputDevices();
         void performSearch();
         static juce::File getDefaultDatabaseFile();
 

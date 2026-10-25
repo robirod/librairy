@@ -26,7 +26,7 @@ MainWindow::MainWindow(const juce::String& name)
     setContentOwned(contentComponent.release(), true);
 
     setResizable(true, true);
-    setResizeLimits(800, 500, 3840, 2160);
+    setResizeLimits(850, 550, 3840, 2160);
     centreWithSize(1320, 840);
     setVisible(true);
 
@@ -80,11 +80,20 @@ MainWindow::MainContent::MainContent()
     metadataPanel.addListener(this);
     scanner->addListener(this);
 
-    // 4. Initial populate
+    // 4. Connect Waveform transport callbacks
+    waveformView.onPlayPauseClicked   = [this]() { audioEngine.togglePlayPause(); };
+    waveformView.onStopClicked        = [this]() { audioEngine.stop(); };
+    waveformView.onRewindClicked      = [this]() { audioEngine.rewind(5.0); };
+    waveformView.onFastForwardClicked = [this]() { audioEngine.fastForward(5.0); };
+    waveformView.onGainChanged        = [this](float gain) { audioEngine.setVolume(gain); };
+    waveformView.setGainValue(audioEngine.getVolume());
+
+    // 5. Initial populate
     refreshLibraries();
+    refreshAudioOutputDevices();
     performSearch();
 
-    // 5. Start playback cursor tracking timer (30 Hz)
+    // 6. Start playback cursor tracking timer (30 Hz)
     startTimerHz(30);
 
     setWantsKeyboardFocus(true);
@@ -111,19 +120,20 @@ void MainWindow::MainContent::resized()
 {
     auto bounds = getLocalBounds();
 
-    // Top: Search bar (46px)
-    searchBar.setBounds(bounds.removeFromTop(46));
+    // Top: Search bar / Toolbar (46px normal, 74px when scanning)
+    int searchBarHeight = (scanner != nullptr && scanner->isScanning()) ? 74 : 46;
+    searchBar.setBounds(bounds.removeFromTop(searchBarHeight));
 
-    // Left: Sidebar (width 220px)
+    // Left: Sidebar (width ~220px)
     auto sidebarWidth = juce::jlimit(180, 260, bounds.getWidth() / 5);
     sidebar.setBounds(bounds.removeFromLeft(sidebarWidth));
 
-    // Right Area: Results Table (50%), Waveform (25%), Metadata (25%)
+    // Right Area: Results Table (50%), Waveform (26%), Metadata (24%)
     auto rightArea = bounds;
     auto totalHeight = rightArea.getHeight();
 
-    int resultsHeight  = static_cast<int>(totalHeight * 0.52);
-    int waveformHeight = static_cast<int>(totalHeight * 0.23);
+    int resultsHeight  = static_cast<int>(totalHeight * 0.50);
+    int waveformHeight = static_cast<int>(totalHeight * 0.26);
 
     resultsTable.setBounds(rightArea.removeFromTop(resultsHeight));
     waveformView.setBounds(rightArea.removeFromTop(waveformHeight));
@@ -142,10 +152,10 @@ bool MainWindow::MainContent::keyPressed(const juce::KeyPress& key)
 
 void MainWindow::MainContent::timerCallback()
 {
-    if (audioEngine.isPlaying())
-    {
-        waveformView.setPlaybackPosition(audioEngine.getPosition());
-    }
+    waveformView.setPlaybackPosition(audioEngine.getPosition());
+    waveformView.setPlaybackInfo(audioEngine.getPositionSeconds(),
+                                 audioEngine.getDuration(),
+                                 audioEngine.isPlaying());
 }
 
 void MainWindow::MainContent::refreshLibraries()
@@ -158,6 +168,13 @@ void MainWindow::MainContent::refreshLibraries()
         lib.fileCount = db->getFileCount(lib.id);
     }
     sidebar.setLibraries(libs);
+}
+
+void MainWindow::MainContent::refreshAudioOutputDevices()
+{
+    auto devices = audioEngine.getAvailableDevices();
+    auto currentDevice = audioEngine.getCurrentOutputDeviceName();
+    searchBar.setAudioOutputDevices(devices, currentDevice);
 }
 
 void MainWindow::MainContent::performSearch()
@@ -177,14 +194,7 @@ void MainWindow::MainContent::performSearch()
     resultsTable.setResults(results);
 }
 
-// ---- LibrarySidebar::Listener ----
-void MainWindow::MainContent::librarySelected(int64_t libraryId)
-{
-    activeLibraryId = libraryId;
-    performSearch();
-}
-
-void MainWindow::MainContent::addLibraryRequested()
+void MainWindow::MainContent::promptAddFolder()
 {
     fileChooser = std::make_unique<juce::FileChooser>(
         "Select Audio Folder to Add to Library",
@@ -207,10 +217,23 @@ void MainWindow::MainContent::addLibraryRequested()
                 activeLibraryId = libId;
                 refreshLibraries();
                 sidebar.setScanStatus("Scanning " + folderName + "...");
+                searchBar.setScanningState(true, 0.0, "Starting scan for " + folderName + "...");
                 scanner->startScan(libId, { result.getFullPathName() }, false);
             }
         }
     });
+}
+
+// ---- LibrarySidebar::Listener ----
+void MainWindow::MainContent::librarySelected(int64_t libraryId)
+{
+    activeLibraryId = libraryId;
+    performSearch();
+}
+
+void MainWindow::MainContent::addLibraryRequested()
+{
+    promptAddFolder();
 }
 
 // ---- SearchBar::Listener ----
@@ -224,6 +247,47 @@ void MainWindow::MainContent::searchSubmitted(const juce::String& query)
 {
     activeQuery = query;
     performSearch();
+}
+
+void MainWindow::MainContent::addFolderRequested()
+{
+    promptAddFolder();
+}
+
+void MainWindow::MainContent::outputDeviceChanged(const juce::String& deviceName)
+{
+    audioEngine.setOutputDevice(deviceName);
+}
+
+void MainWindow::MainContent::audioSetupRequested()
+{
+    auto* selector = new juce::AudioDeviceSelectorComponent(
+        audioEngine.getDeviceManager(),
+        0, 2,  // min/max input channels
+        0, 2,  // min/max output channels
+        false, // show input channels
+        false, // show output channels as stereo pairs
+        true,  // show channels as stereopairs
+        false  // hide advanced options
+    );
+    selector->setSize(520, 360);
+
+    juce::DialogWindow::LaunchOptions options;
+    options.dialogTitle = "Audio Hardware Configuration";
+    options.content.setOwned(selector);
+    options.dialogBackgroundColour = juce::Colour(0xFF222222);
+    options.escapeKeyTriggersCloseButton = true;
+    options.useNativeTitleBar = true;
+    options.resizable = false;
+    options.launchAsync();
+}
+
+void MainWindow::MainContent::scanCancelRequested()
+{
+    if (scanner != nullptr)
+    {
+        scanner->cancelScan();
+    }
 }
 
 // ---- ResultsTable::Listener ----
@@ -274,7 +338,10 @@ void MainWindow::MainContent::metadataSaveRequested()
     // 2. Update SQLite database
     db->upsertFile(*activeFileInfo);
 
-    // 3. Refresh table
+    // 3. Visual notification of successful save
+    metadataPanel.showSaveConfirmation();
+
+    // 4. Refresh table
     performSearch();
 }
 
@@ -283,8 +350,17 @@ void MainWindow::MainContent::scanProgressUpdated(const Scanner::Progress& progr
 {
     juce::MessageManager::callAsync([this, progress]()
     {
-        sidebar.setScanStatus("Indexed: " + juce::String(progress.filesProcessed) +
-                              " (" + juce::String(progress.filesFound) + " found)");
+        double frac = (progress.filesFound > 0)
+            ? static_cast<double>(progress.filesProcessed) / static_cast<double>(progress.filesFound)
+            : 0.0;
+
+        juce::String text = "Scanning: " + juce::String(progress.filesProcessed) +
+                            " / " + juce::String(progress.filesFound) + " files";
+        if (progress.currentFile.isNotEmpty())
+            text += " (" + progress.currentFile + ")";
+
+        searchBar.setScanningState(true, frac, text);
+        sidebar.setScanStatus("Indexed: " + juce::String(progress.filesProcessed));
     });
 }
 
@@ -292,6 +368,7 @@ void MainWindow::MainContent::scanCompleted(const Scanner::Progress& finalProgre
 {
     juce::MessageManager::callAsync([this, finalProgress]()
     {
+        searchBar.setScanningState(false, 1.0, "");
         sidebar.setScanStatus("Ready: " + juce::String(finalProgress.filesProcessed) + " files");
         refreshLibraries();
         performSearch();
@@ -302,6 +379,7 @@ void MainWindow::MainContent::scanCancelled()
 {
     juce::MessageManager::callAsync([this]()
     {
+        searchBar.setScanningState(false, 0.0, "");
         sidebar.setScanStatus("Scan cancelled");
     });
 }

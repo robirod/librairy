@@ -13,7 +13,13 @@ MetadataPanel::MetadataPanel()
     {
         listeners.call([](Listener& l) { l.metadataSaveRequested(); });
     };
+    saveButton.setColour(juce::TextButton::buttonColourId, juce::Colour(0xFF2E66B2));
     addAndMakeVisible(saveButton);
+
+    savedNotificationLabel.setFont(juce::FontOptions(12.0f, juce::Font::bold));
+    savedNotificationLabel.setColour(juce::Label::textColourId, juce::Colour(0xFF4CAF50)); // Green
+    savedNotificationLabel.setJustificationType(juce::Justification::centredRight);
+    addAndMakeVisible(savedNotificationLabel);
 
     viewport.setViewedComponent(&fieldsContainer, false);
     viewport.setScrollBarsShown(true, false);
@@ -71,12 +77,19 @@ void MetadataPanel::paint(juce::Graphics& g)
                static_cast<float>(getWidth()), 0.f);
 }
 
+MetadataPanel::~MetadataPanel()
+{
+    stopTimer();
+}
+
 void MetadataPanel::resized()
 {
     auto bounds = getLocalBounds().reduced(8, 4);
 
     auto header = bounds.removeFromTop(28);
-    saveButton.setBounds(header.removeFromRight(60));
+    saveButton.setBounds(header.removeFromRight(70));
+    header.removeFromRight(8);
+    savedNotificationLabel.setBounds(header.removeFromRight(220));
     titleLabel.setBounds(header);
 
     bounds.removeFromTop(4);
@@ -98,6 +111,22 @@ void MetadataPanel::resized()
     }
 
     fieldsContainer.setSize(containerWidth, yPos);
+}
+
+void MetadataPanel::showSaveConfirmation()
+{
+    saveButton.setButtonText("Saved!");
+    saveButton.setColour(juce::TextButton::buttonColourId, juce::Colour(0xFF2E7D32));
+    savedNotificationLabel.setText("Saved successfully!", juce::dontSendNotification);
+    startTimer(2500);
+}
+
+void MetadataPanel::timerCallback()
+{
+    stopTimer();
+    saveButton.setButtonText("Save");
+    saveButton.setColour(juce::TextButton::buttonColourId, juce::Colour(0xFF2E66B2));
+    savedNotificationLabel.setText("", juce::dontSendNotification);
 }
 
 void MetadataPanel::displayMetadata(const AudioFileInfo& info)

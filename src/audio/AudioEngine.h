@@ -49,14 +49,29 @@ public:
     /** Get total duration in seconds */
     double getDuration() const;
 
-    /** Set playback volume (0.0 - 1.0) */
+    /** Set playback volume (0.0 - 2.0, default 1.0) */
     void setVolume(float volume);
+
+    /** Get current playback volume */
+    float getVolume() const { return currentVolume; }
+
+    /** Seek backward / rewind by seconds */
+    void rewind(double seconds = 5.0);
+
+    /** Seek forward by seconds */
+    void fastForward(double seconds = 5.0);
 
     /** Set the audio output device */
     void setOutputDevice(const juce::String& deviceName);
 
     /** Get available output devices */
     juce::StringArray getAvailableDevices() const;
+
+    /** Get the currently selected output device name */
+    juce::String getCurrentOutputDeviceName() const;
+
+    /** Expose AudioDeviceManager for AudioDeviceSelectorComponent */
+    juce::AudioDeviceManager& getDeviceManager() { return deviceManager; }
 
     /** Listener for position updates */
     class Listener

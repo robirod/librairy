@@ -119,8 +119,20 @@ double AudioEngine::getDuration() const
 
 void AudioEngine::setVolume(float volume)
 {
-    currentVolume = juce::jlimit(0.0f, 1.0f, volume);
+    currentVolume = juce::jlimit(0.0f, 2.0f, volume);
     transportSource.setGain(currentVolume);
+}
+
+void AudioEngine::rewind(double seconds)
+{
+    double newPos = juce::jmax(0.0, getPositionSeconds() - seconds);
+    transportSource.setPosition(newPos);
+}
+
+void AudioEngine::fastForward(double seconds)
+{
+    double newPos = juce::jmin(getDuration(), getPositionSeconds() + seconds);
+    transportSource.setPosition(newPos);
 }
 
 void AudioEngine::setOutputDevice(const juce::String& deviceName)
@@ -128,6 +140,11 @@ void AudioEngine::setOutputDevice(const juce::String& deviceName)
     auto setup = deviceManager.getAudioDeviceSetup();
     setup.outputDeviceName = deviceName;
     deviceManager.setAudioDeviceSetup(setup, true);
+}
+
+juce::String AudioEngine::getCurrentOutputDeviceName() const
+{
+    return deviceManager.getAudioDeviceSetup().outputDeviceName;
 }
 
 juce::StringArray AudioEngine::getAvailableDevices() const

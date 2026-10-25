@@ -3,12 +3,14 @@
 #include <juce_gui_basics/juce_gui_basics.h>
 #include <juce_audio_formats/juce_audio_formats.h>
 #include <juce_audio_utils/juce_audio_utils.h>
+#include <functional>
 
 namespace librairy
 {
 
 /**
- * Waveform display with playback cursor, zoom, and scrub support.
+ * Waveform display with integrated transport controls (Play, Pause, Stop, Rewind, Forward)
+ * gain slider, time display, and interactive scrub.
  */
 class WaveformView : public juce::Component,
                      public juce::ChangeListener
@@ -29,10 +31,23 @@ public:
     /** Set the playback position (0.0 to 1.0) */
     void setPlaybackPosition(double normalizedPosition);
 
+    /** Update time and playback status for transport buttons */
+    void setPlaybackInfo(double currentSeconds, double totalDuration, bool isPlaying);
+
+    /** Set volume gain slider value */
+    void setGainValue(float gain);
+
+    // Callbacks for transport
+    std::function<void()>      onPlayPauseClicked;
+    std::function<void()>      onStopClicked;
+    std::function<void()>      onRewindClicked;
+    std::function<void()>      onFastForwardClicked;
+    std::function<void(float)> onGainChanged;
+
     // ChangeListener
     void changeListenerCallback(juce::ChangeBroadcaster* source) override;
 
-    // Mouse interaction
+    // Mouse interaction on waveform
     void mouseDown(const juce::MouseEvent& event) override;
     void mouseDrag(const juce::MouseEvent& event) override;
 
@@ -56,12 +71,23 @@ private:
     double currentPosition = 0.0;
     bool   fileLoaded = false;
 
+    // Transport UI
+    juce::TextButton rewindButton    { "<<" };
+    juce::TextButton playPauseButton { "Play" };
+    juce::TextButton stopButton      { "Stop" };
+    juce::TextButton forwardButton   { ">>" };
+    juce::Label      timeLabel;
+    juce::Label      gainLabel       { {}, "Gain:" };
+    juce::Slider     gainSlider;
+
+    juce::Rectangle<int> waveformArea;
+
     juce::ListenerList<Listener> listeners;
 
     void updatePositionFromMouse(const juce::MouseEvent& event);
+    static juce::String formatTime(double seconds);
 
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR(WaveformView)
 };
 
 } // namespace librairy
-

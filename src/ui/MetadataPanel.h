@@ -10,20 +10,25 @@ namespace librairy
  * Panel for viewing and editing metadata of the currently selected audio file.
  * Displays standard fields (BWF, iXML, ID3) and allows inline editing.
  */
-class MetadataPanel : public juce::Component
+class MetadataPanel : public juce::Component,
+                      public juce::Timer
 {
 public:
     MetadataPanel();
-    ~MetadataPanel() override = default;
+    ~MetadataPanel() override;
 
     void resized() override;
     void paint(juce::Graphics& g) override;
+    void timerCallback() override;
 
     /** Display metadata for the given file */
     void displayMetadata(const AudioFileInfo& info);
 
     /** Populate the given AudioFileInfo with current values from text fields */
     void populateUpdatedInfo(AudioFileInfo& info) const;
+
+    /** Trigger a visual confirmation that metadata was saved successfully */
+    void showSaveConfirmation();
 
     /** Clear displayed metadata */
     void clear();
@@ -44,6 +49,7 @@ public:
 private:
     juce::Label         titleLabel    { {}, "Metadata" };
     juce::TextButton    saveButton    { "Save" };
+    juce::Label         savedNotificationLabel;
 
     // Editable fields
     struct MetadataField
