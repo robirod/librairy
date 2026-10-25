@@ -1,0 +1,181 @@
+# Librairy Audio Taxonomy
+#
+# Hierarchical taxonomy for audio classification.
+# Based on Universal Category System (UCS) with extensions.
+# https://universalcategorysystem.com/
+#
+# Format: Category > Subcategories
+
+taxonomy:
+  Ambience:
+    description: "Continuous environmental/atmospheric sounds"
+    subcategories:
+      - City
+      - Countryside
+      - Forest
+      - Beach / Ocean
+      - Rain
+      - Wind
+      - Thunder / Storm
+      - River / Stream
+      - Underwater
+      - Interior
+      - Industrial
+      - Airport
+      - Office
+      - Restaurant / Cafe
+      - Market
+      - Crowd
+
+  Animal:
+    description: "Sounds produced by animals"
+    subcategories:
+      - Bird
+      - Dog
+      - Cat
+      - Insect
+      - Horse
+      - Wildlife
+      - Farm Animals
+      - Marine Life
+
+  Foley:
+    description: "Everyday object sounds for film/TV sync"
+    subcategories:
+      - Footsteps
+      - Cloth / Fabric
+      - Door
+      - Glass
+      - Metal
+      - Paper
+      - Plastic
+      - Wood
+      - Water (interaction)
+      - Keys / Coins
+      - Food / Cooking
+      - Writing
+
+  Impact:
+    description: "Collision and impact sounds"
+    subcategories:
+      - Hit
+      - Crash
+      - Punch / Body Impact
+      - Drop
+      - Smash
+      - Thud
+
+  Explosion:
+    description: "Explosive events"
+    subcategories:
+      - Large
+      - Medium
+      - Small
+      - Debris
+      - Distant
+
+  Vehicle:
+    description: "Motorized and non-motorized vehicle sounds"
+    subcategories:
+      - Car
+      - Truck
+      - Motorcycle
+      - Bus
+      - Train
+      - Airplane
+      - Helicopter
+      - Boat
+      - Bicycle
+
+  Weather:
+    description: "Atmospheric weather events"
+    subcategories:
+      - Rain
+      - Thunder
+      - Wind
+      - Storm
+      - Snow / Ice
+      - Hail
+
+  Water:
+    description: "Water sounds"
+    subcategories:
+      - Splash
+      - Drip
+      - Pour
+      - Wave
+      - Stream
+      - Bubble
+      - Underwater
+
+  Human:
+    description: "Non-speech human sounds"
+    subcategories:
+      - Breathing
+      - Cough
+      - Laugh
+      - Scream
+      - Whistle
+      - Clap
+      - Crowd Reaction
+
+  Music:
+    description: "Musical elements and instruments"
+    subcategories:
+      - Stinger
+      - Transition
+      - Drone
+      - Percussion Hit
+      - Instrument
+
+  UI / Game:
+    description: "Interface and game sounds"
+    subcategories:
+      - Click
+      - Notification
+      - Alert
+      - Power Up
+      - Power Down
+      - Whoosh
+      - Transition
+
+  Mechanical:
+    description: "Machinery and mechanisms"
+    subcategories:
+      - Motor
+      - Gear
+      - Switch
+      - Lever
+      - Hydraulic
+      - Electrical
+      - Clock
+
+  Weapon:
+    description: "Weapon sounds"
+    subcategories:
+      - Gunshot
+      - Reload
+      - Sword / Blade
+      - Bow
+      - Laser (sci-fi)
+      - Holster
+
+  Horror / Sci-Fi:
+    description: "Designed and supernatural sounds"
+    subcategories:
+      - Creature
+      - Ghost / Supernatural
+      - Space
+      - Glitch
+      - Drone
+      - Transition
+
+  Nature:
+    description: "Natural environmental elements"
+    subcategories:
+      - Leaf / Foliage
+      - Earth / Rock
+      - Fire
+      - Ice
+      - Volcano
+

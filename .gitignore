@@ -1,0 +1,16 @@
+.DS_Store
+build/
+cmake-build*/
+*.o
+*.a
+*.dylib
+*.so
+.cache/
+compile_commands.json
+ml/.venv/
+ml/__pycache__/
+*.egg-info/
+*.onnx
+*.pt
+*.pth
+
