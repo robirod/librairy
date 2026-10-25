@@ -1,0 +1,129 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="900" viewBox="0 0 1600 900">
+  <!-- Fondo -->
+  <rect width="1600" height="900" fill="#1E1E1E"/>
+  
+  <!-- Barra superior -->
+  <rect x="0" y="0" width="1600" height="48" fill="#252526" stroke="#3C3C3C" stroke-width="1"/>
+  <rect x="16" y="12" width="200" height="24" rx="4" fill="#333333" stroke="#5F5F5F"/>
+  <text x="116" y="28" fill="#CCCCCC" font-size="11" font-family="Arial" text-anchor="middle">Biblioteca ▼</text>
+  
+  <rect x="230" y="12" width="900" height="24" rx="4" fill="#333333" stroke="#5F5F5F"/>
+  <text x="680" y="28" fill="#808080" font-size="11" font-family="Arial" text-anchor="middle">Buscar en biblioteca...</text>
+  
+  <rect x="1145" y="12" width="90" height="24" rx="4" fill="#333333" stroke="#5F5F5F"/>
+  <text x="1190" y="28" fill="#CCCCCC" font-size="11" font-family="Arial" text-anchor="middle">Filtros ▼</text>
+  
+  <rect x="1248" y="12" width="110" height="24" rx="4" fill="#333333" stroke="#5F5F5F"/>
+  <text x="1303" y="28" fill="#CCCCCC" font-size="11" font-family="Arial" text-anchor="middle">Vista: Tabla ▼</text>
+  
+  <!-- Sidebar izquierda -->
+  <rect x="0" y="48" width="240" height="852" fill="#252526" stroke="#3C3C3C" stroke-width="1"/>
+  <text x="16" y="72" fill="#CCCCCC" font-size="11" font-family="Arial" font-weight="bold">BIBLIOTECAS</text>
+  
+  <text x="24" y="96" fill="#CCCCCC" font-size="11" font-family="Arial">▾ SFX Producción</text>
+  <text x="36" y="116" fill="#9CDCFE" font-size="11" font-family="Arial">Ambience</text>
+  <text x="36" y="136" fill="#CCCCCC" font-size="11" font-family="Arial">Foley</text>
+  <text x="36" y="156" fill="#CCCCCC" font-size="11" font-family="Arial">Impacts</text>
+  
+  <text x="24" y="184" fill="#CCCCCC" font-size="11" font-family="Arial">▸ Ambientes Sonoros</text>
+  <text x="24" y="204" fill="#CCCCCC" font-size="11" font-family="Arial">▸ Foley Personal</text>
+  <text x="24" y="224" fill="#CCCCCC" font-size="11" font-family="Arial">▸ Librería Externa</text>
+  
+  <text x="16" y="260" fill="#CCCCCC" font-size="11" font-family="Arial" font-weight="bold">CARPETAS</text>
+  <text x="24" y="284" fill="#CCCCCC" font-size="11" font-family="Arial">▸ Field Recordings</text>
+  <text x="24" y="304" fill="#CCCCCC" font-size="11" font-family="Arial">▸ Processed</text>
+  
+  <!-- Área de tabla de resultados -->
+  <rect x="240" y="48" width="1360" height="500" fill="#1E1E1E" stroke="#3C3C3C" stroke-width="1"/>
+  
+  <!-- Cabecera de tabla -->
+  <rect x="240" y="48" width="1360" height="28" fill="#2D2D30" stroke="#3C3C3C" stroke-width="1"/>
+  <text x="260" y="66" fill="#CCCCCC" font-size="10" font-family="Arial">NOMBRE</text>
+  <text x="620" y="66" fill="#CCCCCC" font-size="10" font-family="Arial">CATEGORÍA/SUBCAT</text>
+  <text x="820" y="66" fill="#CCCCCC" font-size="10" font-family="Arial">DURACIÓN</text>
+  <text x="920" y="66" fill="#CCCCCC" font-size="10" font-family="Arial">SR</text>
+  <text x="980" y="66" fill="#CCCCCC" font-size="10" font-family="Arial">CH</text>
+  <text x="1040" y="66" fill="#CCCCCC" font-size="10" font-family="Arial">FORMATO</text>
+  <text x="1140" y="66" fill="#CCCCCC" font-size="10" font-family="Arial">RATING</text>
+  <text x="1260" y="66" fill="#CCCCCC" font-size="10" font-family="Arial">IA SUGERIDO</text>
+  
+  <!-- Filas de resultados (simuladas) -->
+  <rect x="240" y="76" width="1360" height="24" fill="#094771"/>
+  <text x="260" y="92" fill="#FFFFFF" font-size="11" font-family="Arial">AMBFOR_ForestDawn_BirdsChirping_Close.wav</text>
+  <text x="620" y="92" fill="#CCCCCC" font-size="11" font-family="Arial">Ambience / Forest</text>
+  <text x="820" y="92" fill="#CCCCCC" font-size="11" font-family="Arial">00:47.250</text>
+  <text x="920" y="92" fill="#CCCCCC" font-size="11" font-family="Arial">96 kHz</text>
+  <text x="980" y="92" fill="#CCCCCC" font-size="11" font-family="Arial">2.0</text>
+  <text x="1040" y="92" fill="#CCCCCC" font-size="11" font-family="Arial">WAV</text>
+  <text x="1140" y="92" fill="#CCCCCC" font-size="11" font-family="Arial">★★★★☆</text>
+  <text x="1260" y="92" fill="#4EC9B0" font-size="11" font-family="Arial">92% ✓</text>
+  
+  <rect x="240" y="100" width="1360" height="24" fill="transparent"/>
+  <text x="260" y="116" fill="#CCCCCC" font-size="11" font-family="Arial">WATRSTRM_RiverFlow_GentleCurrent_Close.wav</text>
+  <text x="620" y="116" fill="#CCCCCC" font-size="11" font-family="Arial">Water / Stream</text>
+  <text x="820" y="116" fill="#CCCCCC" font-size="11" font-family="Arial">01:23.140</text>
+  <text x="920" y="116" fill="#CCCCCC" font-size="11" font-family="Arial">96 kHz</text>
+  <text x="980" y="116" fill="#CCCCCC" font-size="11" font-family="Arial">2.0</text>
+  <text x="1040" y="116" fill="#CCCCCC" font-size="11" font-family="Arial">WAV</text>
+  <text x="1140" y="116" fill="#CCCCCC" font-size="11" font-family="Arial">★★★☆☆</text>
+  <text x="1260" y="116" fill="#4EC9B0" font-size="11" font-family="Arial">88% ✓</text>
+  
+  <rect x="240" y="124" width="1360" height="24" fill="#2A2D2E"/>
+  <text x="260" y="140" fill="#CCCCCC" font-size="11" font-family="Arial">FOLEYSTEP_Concrete_Walk_HeelToe.wav</text>
+  <text x="620" y="140" fill="#CCCCCC" font-size="11" font-family="Arial">Foley / Footsteps</text>
+  <text x="820" y="140" fill="#CCCCCC" font-size="11" font-family="Arial">00:08.320</text>
+  <text x="920" y="140" fill="#CCCCCC" font-size="11" font-family="Arial">48 kHz</text>
+  <text x="980" y="140" fill="#CCCCCC" font-size="11" font-family="Arial">1.0</text>
+  <text x="1040" y="140" fill="#CCCCCC" font-size="11" font-family="Arial">WAV</text>
+  <text x="1140" y="140" fill="#CCCCCC" font-size="11" font-family="Arial">☆☆☆☆☆</text>
+  <text x="1260" y="140" fill="#DCDCAA" font-size="11" font-family="Arial">76% ?</text>
+  
+  <!-- Área de forma de onda y transporte -->
+  <rect x="240" y="548" width="900" height="180" fill="#252526" stroke="#3C3C3C" stroke-width="1"/>
+  <text x="260" y="572" fill="#CCCCCC" font-size="11" font-family="Arial">FORMA DE ONDA - AMBFOR_ForestDawn_BirdsChirping_Close.wav</text>
+  
+  <!-- Waveform placeholder -->
+  <path d="M 260 638 L 280 620 L 300 650 L 320 610 L 340 660 L 360 600 L 380 670 L 400 590 L 420 680 L 440 585 L 460 685 L 480 590 L 500 680 L 520 600 L 540 670 L 560 610 L 580 660 L 600 620 L 620 650 L 640 630 L 660 645 L 680 635 L 700 640 L 720 635 L 740 640 L 760 638 L 780 638 L 800 638 L 820 638 L 840 638 L 860 638 L 880 638 L 900 638 L 920 638 L 940 638 L 960 638 L 980 638 L 1000 638 L 1020 638 L 1040 638 L 1060 638 L 1080 638 L 1100 638" stroke="#4FC1FF" stroke-width="2" fill="none"/>
+  <rect x="260" y="698" width="880" height="4" rx="2" fill="#3C3C3C"/>
+  <circle cx="420" cy="700" r="6" fill="#4FC1FF"/>
+  
+  <!-- Controles de transporte -->
+  <text x="700" y="716" fill="#CCCCCC" font-size="10" font-family="Arial" text-anchor="middle">◀◀   ▶   ▶▶   |   00:12.450 / 00:47.250</text>
+  
+  <!-- Panel de metadatos -->
+  <rect x="1140" y="548" width="460" height="352" fill="#252526" stroke="#3C3C3C" stroke-width="1"/>
+  
+  <!-- Pestañas de metadatos -->
+  <rect x="1140" y="548" width="115" height="28" fill="#2D2D30" stroke="#3C3C3C" stroke-width="1"/>
+  <rect x="1255" y="548" width="115" height="28" fill="#252526" stroke="#3C3C3C" stroke-width="1"/>
+  <rect x="1370" y="548" width="115" height="28" fill="#252526" stroke="#3C3C3C" stroke-width="1"/>
+  <rect x="1485" y="548" width="115" height="28" fill="#252526" stroke="#3C3C3C" stroke-width="1"/>
+  
+  <text x="1197" y="566" fill="#FFFFFF" font-size="10" font-family="Arial" text-anchor="middle" font-weight="bold">GENERAL</text>
+  <text x="1312" y="566" fill="#CCCCCC" font-size="10" font-family="Arial" text-anchor="middle">BWF / iXML</text>
+  <text x="1427" y="566" fill="#CCCCCC" font-size="10" font-family="Arial" text-anchor="middle">UCS</text>
+  <text x="1542" y="566" fill="#CCCCCC" font-size="10" font-family="Arial" text-anchor="middle">IA SUGERENCIAS</text>
+  
+  <!-- Contenido del panel -->
+  <text x="1160" y="596" fill="#CCCCCC" font-size="10" font-family="Arial" font-weight="bold">Archivo</text>
+  <text x="1160" y="614" fill="#9CDCFE" font-size="10" font-family="Arial">AMBFOR_ForestDawn_BirdsChirping_Close.wav</text>
+  
+  <text x="1160" y="642" fill="#CCCCCC" font-size="10" font-family="Arial" font-weight="bold">Descripción</text>
+  <text x="1160" y="660" fill="#CCCCCC" font-size="10" font-family="Arial">Morning forest ambience, birds chirping at dawn</text>
+  
+  <text x="1160" y="688" fill="#CCCCCC" font-size="10" font-family="Arial" font-weight="bold">Origen</text>
+  <text x="1160" y="706" fill="#CCCCCC" font-size="10" font-family="Arial">Zoom H6 | 2026-10-24 06:23</text>
+  
+  <text x="1160" y="734" fill="#CCCCCC" font-size="10" font-family="Arial" font-weight="bold">Categoría (UCS)</text>
+  <text x="1160" y="752" fill="#CCCCCC" font-size="10" font-family="Arial">Ambience / Forest</text>
+  
+  <text x="1160" y="780" fill="#CCCCCC" font-size="10" font-family="Arial" font-weight="bold">Keywords</text>
+  <text x="1160" y="798" fill="#4EC9B0" font-size="10" font-family="Arial">birds, forest, dawn, ambience, nature</text>
+  
+  <text x="1160" y="826" fill="#CCCCCC" font-size="10" font-family="Arial" font-weight="bold">Notas de Usuario</text>
+  <rect x="1160" y="834" width="420" height="52" rx="4" fill="#333333" stroke="#5F5F5F"/>
+  <text x="1170" y="852" fill="#808080" font-size="10" font-family="Arial">Añadir notas...</text>
+  
+  <!-- Separador entre waveform y metadata horizontal -->
+  <line x1="240" y1="728" x2="1140" y2="728" stroke="#3C3C3C" stroke-width="1"/>
+</svg>
